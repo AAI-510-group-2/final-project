@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import matplotlib.ticker as ticker
+from utils import *
 
 def draw_box_plot(df, col, title):
     plt.figure(figsize=(10, 6))
@@ -11,14 +12,6 @@ def draw_box_plot(df, col, title):
 
     plt.title(title)
     plt.show()
-
-def print_title(title):
-    print("\n" + "=" * 50)
-    print(title)
-    print("=" * 50)
-
-def print_sub_title(title):
-    print("*" * 25 + title + "*" * 25 + "\n")
 
 def explore_data(df):
     print_title("Exploring data")
@@ -44,4 +37,27 @@ def explore_data(df):
     sns.barplot(y=category_counts.index, x=category_counts.values, order=category_counts.index)
     plt.title('Job Title - job_title')
     plt.show()
+
+    print_title("Dataset Shape:")
+    print(df.shape)
+
+    print_title("Dataset Info:")
+    print(df.info())
+
+    print_title("Missing Values:")
+    missing_values = df.isnull().sum()
+    missing_percentage = (missing_values / len(df)) * 100
+    missing_df = pd.DataFrame({
+        'Missing Count': missing_values,
+        'Missing Percentage': missing_percentage
+    }).sort_values('Missing Count', ascending=False)
+    print(missing_df[missing_df['Missing Count'] > 0])
+
+    print_title("Check for Duplicates")
+    print("Duplicate rows:", df.duplicated().sum())
+    print("Duplicate job_ids:", df['job_id'].duplicated().sum())
+
+    print_title("Numerical Variables Summary:")
+    numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns
+    print(df[numerical_cols].describe())
 
