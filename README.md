@@ -8,6 +8,7 @@ This project is a part of the AAI-510 course in the Applied Artificial Intellige
 Project Status: [Completed]
 
 **Installation/Setup**
+
 To process the movie dataset and then apply model training techniques on it, download the finalProject_AAI510.ipynb file and load it into colab (https://colab.research.google.com/)
 
 Then download the dataset which can be found at (https://www.kaggle.com/datasets/bismasajjad/global-ai-job-market-and-salary-trends-2025).
